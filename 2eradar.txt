@@ -1,0 +1,307 @@
+ 530:	48 8d 15 7d 03 00 00 	lea    rdx,[rip+0x37d]			# 8b4 <_IO_stdin_used+0x4>
+ 537:	c7 44 24 f4 00 00 00 	mov    DWORD PTR [rsp-0xc],0x0
+ 53e:	00 
+ 53f:	49 ba 9e fa 95 ef 92 	movabs r10,0xedd5a792ef95fa9e		#r10=0xedd5a792ef95fa9e
+ 546:	a7 d5 ed 
+ 549:	41 b9 cc ff ff ff    	mov    r9d,0xffffffcc			#r9d=0xffffffcc
+ 54f:	90                   	nop
+ 550:	8b 44 24 f4          	mov    eax,DWORD PTR [rsp-0xc]
+ 554:	83 f8 0d             	cmp    eax,0xd
+ 557:	77 23                	ja     57c <main+0x4c>
+ 559:	48 63 04 82          	movsxd rax,DWORD PTR [rdx+rax*4]
+ 55d:	48 01 d0             	add    rax,rdx
+ 560:	ff e0                	jmp    rax
+	|
+	|
+ 6a0:	83 ff 02             	cmp    edi,0x2				#edi=0x2(コマンドライン引数が2つ以上の時に終了)
+ 6a3:	0f 85 d3 fe ff ff    	jne    57c <main+0x4c>
+ 6a9:	c7 44 24 f4 01 00 00 	mov    DWORD PTR [rsp-0xc],0x1
+ 6b0:	00 
+ 6b1:	e9 9a fe ff ff       	jmp    550 <main+0x20>
+	|
+	|
+ 550:	8b 44 24 f4          	mov    eax,DWORD PTR [rsp-0xc]
+ 554:	83 f8 0d             	cmp    eax,0xd
+ 557:	77 23                	ja     57c <main+0x4c>
+ 559:	48 63 04 82          	movsxd rax,DWORD PTR [rdx+rax*4]
+ 55d:	48 01 d0             	add    rax,rdx
+ 560:	ff e0                	jmp    rax
+	|
+	|
+ 688:	c7 44 24 f4 02 00 00 	mov    DWORD PTR [rsp-0xc],0x2
+ 68f:	00 
+ 690:	31 c9                	xor    ecx,ecx				#ecx=0x0
+ 692:	e9 b9 fe ff ff       	jmp    550 <main+0x20>
+	|
+	|
+ 550:	8b 44 24 f4          	mov    eax,DWORD PTR [rsp-0xc]
+ 554:	83 f8 0d             	cmp    eax,0xd
+ 557:	77 23                	ja     57c <main+0x4c>
+ 559:	48 63 04 82          	movsxd rax,DWORD PTR [rdx+rax*4]
+ 55d:	48 01 d0             	add    rax,rdx
+ 560:	ff e0                	jmp    rax
+	|
+	|
+ 670:	83 f9 07             	cmp    ecx,0x7				#ecx=0x0(ecx>0x7の時に分岐)
+ 673:	77 c9                	ja     63e <main+0x10e>
+ 675:	c7 44 24 f4 03 00 00 	mov    DWORD PTR [rsp-0xc],0x3
+ 67c:	00 
+ 67d:	e9 ce fe ff ff       	jmp    550 <main+0x20>
+	|
+	|
+ 550:	8b 44 24 f4          	mov    eax,DWORD PTR [rsp-0xc]
+ 554:	83 f8 0d             	cmp    eax,0xd
+ 557:	77 23                	ja     57c <main+0x4c>
+ 559:	48 63 04 82          	movsxd rax,DWORD PTR [rdx+rax*4]
+ 55d:	48 01 d0             	add    rax,rdx
+ 560:	ff e0                	jmp    rax
+	|
+	|
+ 	+<-----------------------------------------------------------------------------------------------------<+
+ 650:	4c 8b 5e 08          	mov    r11,QWORD PTR [rsi+0x8]	#入力されたコマンドライン引数の先頭addrを格納？	++
+ 654:	48 63 c1             	movsxd rax,ecx			#raxの値をincすることでコマンドライン引数を走査？|
+ 657:	c7 44 24 f4 04 00 00 	mov    DWORD PTR [rsp-0xc],0x4							++
+ 65e:	00 													|
+ 65f:	45 0f b6 1c 03       	movzx  r11d,BYTE PTR [r11+rax*1]	#n番目のコマンドライン引数文字を格納？	+-------+
+ 664:	44 88 5c 04 f8       	mov    BYTE PTR [rsp+rax*1-0x8],r11b	#n番目のコマンドライン引数文字をスタックに格納？|
+ 669:	e9 e2 fe ff ff       	jmp    550 <main+0x20>								+-------+
+	|													|
+	|													|
+	|													|
+ 550:	8b 44 24 f4          	mov    eax,DWORD PTR [rsp-0xc]							|
+ 554:	83 f8 0d             	cmp    eax,0xd									|
+ 557:	77 23                	ja     57c <main+0x4c>								|
+ 559:	48 63 04 82          	movsxd rax,DWORD PTR [rdx+rax*4]						|
+ 55d:	48 01 d0             	add    rax,rdx									|
+ 560:	ff e0                	jmp    rax									|
+	|													|
+	|													|
+ 630:	48 63 c1             	movsxd rax,ecx		#raxを任意の値に変更					|
+ 633:	80 7c 04 f8 00       	cmp    BYTE PTR [rsp+rax*1-0x8],0x0	#ヌル文字と比較				|
+ 638:	0f 85 96 00 00 00    	jne    6d4 <main+0x1a4>								|
+	|													|
+	+>------------------------------------------------------------------------------------------------------>+
+	|													||
+ 6d4:	c7 44 24 f4 05 00 00 	mov    DWORD PTR [rsp-0xc],0x5							|| 
+ 6db:	00 													||
+ 6dc:	e9 6f fe ff ff       	jmp    550 <main+0x20>								||
+	|													||
+	|													||
+ 550:	8b 44 24 f4          	mov    eax,DWORD PTR [rsp-0xc]							||
+ 554:	83 f8 0d             	cmp    eax,0xd									||
+ 557:	77 23                	ja     57c <main+0x4c>								||
+ 559:	48 63 04 82          	movsxd rax,DWORD PTR [rdx+rax*4]						||
+ 55d:	48 01 d0             	add    rax,rdx									||
+ 560:	ff e0                	jmp    rax									||
+	|													||
+	|													||
+#0x620番地にジャンプするためにはレジスタジャンプするしかないようだ						||
+#0x620-0x8b4=0xfffffd6c(=*0x8c8)										||
+#[rsp-0xc]に0x5が格納されれば0x620番地に分岐する								||
+ 620:	83 c1 01             	add    ecx,0x1		#ecxをincしてコマンドライン引数の任意バイトを比較可能に ||
+ 623:	c7 44 24 f4 02 00 00 	mov    DWORD PTR [rsp-0xc],0x2							||
+ 62b:	e9 20 ff ff ff       	jmp    550 <main+0x20>								||
+	|													||
+	|													||
+ 550:	8b 44 24 f4          	mov    eax,DWORD PTR [rsp-0xc]							||
+ 554:	83 f8 0d             	cmp    eax,0xd									||
+ 557:	77 23                	ja     57c <main+0x4c>								|| 
+ 559:	48 63 04 82          	movsxd rax,DWORD PTR [rdx+rax*4]						||
+ 55d:	48 01 d0             	add    rax,rdx									||
+ 560:	ff e0                	jmp    rax									||
+	|													||
+	|													||
+ 670:	83 f9 07             	cmp    ecx,0x7				#ecx>0x7の時に分岐			||
+ 673:	77 c9                	ja     63e <main+0x10e>								||
+	|													||
+	+>------------------------------------------------------------------------------------------------------>+
+ 675:	c7 44 24 f4 03 00 00 	mov    DWORD PTR [rsp-0xc],0x3							||
+ 67c:	00 													||
+ 67d:	e9 ce fe ff ff       	jmp    550 <main+0x20>								||
+	|													||
+	|													||
+ 550:	8b 44 24 f4          	mov    eax,DWORD PTR [rsp-0xc]							||
+ 554:	83 f8 0d             	cmp    eax,0xd									||
+ 557:	77 23                	ja     57c <main+0x4c>								||
+ 559:	48 63 04 82          	movsxd rax,DWORD PTR [rdx+rax*4]						||
+ 55d:	48 01 d0             	add    rax,rdx									||
+ 560:	ff e0                	jmp    rax									||
+	|													||
+	+>----------------------------------------------------------------------------------------------------->+|
+														 |
+	+<------------------------------------------------------------------------------------------------------<+
+	|
+	|
+ 63e:	c7 44 24 f4 06 00 00 	mov    DWORD PTR [rsp-0xc],0x6
+ 645:	00
+ 646:	e9 05 ff ff ff       	jmp    550 <main+0x20>
+	|
+	|
+ 550:	8b 44 24 f4          	mov    eax,DWORD PTR [rsp-0xc]
+ 554:	83 f8 0d             	cmp    eax,0xd
+ 557:	77 23                	ja     57c <main+0x4c>
+ 559:	48 63 04 82          	movsxd rax,DWORD PTR [rdx+rax*4]
+ 55d:	48 01 d0             	add    rax,rdx
+ 560:	ff e0                	jmp    rax
+	|
+	|
+ 600:	83 f9 08             	cmp    ecx,0x8				#文字列の長さは8文字
+ 603:	0f 85 73 ff ff ff    	jne    57c <main+0x4c>
+ 609:	c7 44 24 f4 07 00 00 	mov    DWORD PTR [rsp-0xc],0x7
+ 610:	00 
+ 611:	e9 3a ff ff ff       	jmp    550 <main+0x20>
+	|
+	|
+ 550:	8b 44 24 f4          	mov    eax,DWORD PTR [rsp-0xc]
+ 554:	83 f8 0d             	cmp    eax,0xd
+ 557:	77 23                	ja     57c <main+0x4c>
+ 559:	48 63 04 82          	movsxd rax,DWORD PTR [rdx+rax*4]
+ 55d:	48 01 d0             	add    rax,rdx
+ 560:	ff e0                	jmp    rax
+	|
+	|
+ #5f0にはレジスタジャンプするしかないようだ
+ #5f0-8b4=fffffd3c(=*0x8d0)
+ #[rsp-0xc]に0x7が代入されたときに0x5f0に分岐
+ 5f0:	c7 44 24 f4 08 00 00 	mov    DWORD PTR [rsp-0xc],0x8
+ 5f7:	00 
+ 5f8:	45 89 c8             	mov    r8d,r9d				#r8d=0xffffffcc
+ 5fb:	e9 50 ff ff ff       	jmp    550 <main+0x20>	
+	|
+	|
+ 550:	8b 44 24 f4          	mov    eax,DWORD PTR [rsp-0xc]
+ 554:	83 f8 0d             	cmp    eax,0xd
+ 557:	77 23                	ja     57c <main+0x4c>
+ 559:	48 63 04 82          	movsxd rax,DWORD PTR [rdx+rax*4]
+ 55d:	48 01 d0             	add    rax,rdx
+ 560:	ff e0                	jmp    rax
+	|
+	|
+ #5e0にはレジスタジャンプするしかないようだ
+ #5e0-8b4=fffffd24(=*0x8d4)
+ #[rsp-0xc]に0x8が代入されたときに0x5e0に分岐
+ 5e0:	c7 44 24 f4 09 00 00 	mov    DWORD PTR [rsp-0xc],0x9
+ 5e7:	00 
+ 5e8:	31 c9                	xor    ecx,ecx				#ecx=0x0
+ 5ea:	e9 61 ff ff ff       	jmp    550 <main+0x20>
+	|
+	|
+ 550:	8b 44 24 f4          	mov    eax,DWORD PTR [rsp-0xc]
+ 554:	83 f8 0d             	cmp    eax,0xd
+ 557:	77 23                	ja     57c <main+0x4c>
+ 559:	48 63 04 82          	movsxd rax,DWORD PTR [rdx+rax*4]
+ 55d:	48 01 d0             	add    rax,rdx
+ 560:	ff e0                	jmp    rax
+	|
+	+<----------------------------------------------------------------------------------------<+
+ 5c0:	83 f9 07             	cmp    ecx,0x7							   |
+ 5c3:	0f 86 18 01 00 00    	jbe    6e1 <main+0x1b1>						   |
+	+>-------------------------------------------------------------------------------------->+ |
+	|											 | |		
+ 5c9:	c7 44 24 f4 0d 00 00 	mov    DWORD PTR [rsp-0xc],0xd					 | |
+ 5d0:	00 											 | |
+ 5d1:	e9 7a ff ff ff       	jmp    550 <main+0x20>						 | |
+	|											 | |
+	|											 | |
+ 550:	8b 44 24 f4          	mov    eax,DWORD PTR [rsp-0xc]					 | |
+ 554:	83 f8 0d             	cmp    eax,0xd							 | |
+ 557:	77 23                	ja     57c <main+0x4c>						 | | 
+ 559:	48 63 04 82          	movsxd rax,DWORD PTR [rdx+rax*4]				 | |
+ 55d:	48 01 d0             	add    rax,rdx							 | |
+ 560:	ff e0                	jmp    rax							 | |
+	|											 | |
+	|											 | |
+ #6c0にはレジスタジャンプするしかないようだ							 | |
+ #6c0-8b4=fffffe0c(=*0x8e8)									 | |
+ #[rsp-0xc]に0xdが代入されたときに0x6c0に分岐							 | |
+ 6c0:	4c 39 54 24 f8       	cmp    QWORD PTR [rsp-0x8],r10					 | |
+ 6c5:	74 27                	je     6ee <main+0x1be>						 | |
+	+>------------------------------------------------------------------------------------->+| |
+	|											|| |
+ 6ee:	31 c0                	xor    eax,eax							|| |
+ 6f0:	c3                   	ret								|| |
+												|| |
+	+<-------------------------------------------------------------------------------------<+| |
+	|											 | |
+#eax>0xdにつきreturn(1);									 | |
+												 | |
+	+<--------------------------------------------------------------------------------------<+ |
+	|											   |
+ 6e1:	c7 44 24 f4 0a 00 00 	mov    DWORD PTR [rsp-0xc],0xa					   |
+ 6e8:	00 											   |
+ 6e9:	e9 62 fe ff ff       	jmp    550 <main+0x20>						   |
+	|											   |
+	|											   |
+ 550:	8b 44 24 f4          	mov    eax,DWORD PTR [rsp-0xc]					   |
+ 554:	83 f8 0d             	cmp    eax,0xd							   |
+ 557:	77 23                	ja     57c <main+0x4c>						   |
+ 559:	48 63 04 82          	movsxd rax,DWORD PTR [rdx+rax*4]				   |
+ 55d:	48 01 d0             	add    rax,rdx							   |
+ 560:	ff e0                	jmp    rax							   |
+	|											   |
+	|											   |
+ 5a0:	48 63 c1             	movsxd rax,ecx							   |
+ 5a3:	45 8d 1c 08          	lea    r11d,[r8+rcx*1]	#r11dにr8+rcxの値を格納			   |
+ 5a7:	c7 44 24 f4 0b 00 00 	mov    DWORD PTR [rsp-0xc],0xb					   |
+ 5ae:	00 											   |
+ 5af:	44 30 5c 04 f8       	xor    BYTE PTR [rsp+rax*1-0x8],r11b	#xorをとった「結果」を格納 |
+ 5b4:	eb 9a                	jmp    550 <main+0x20>						   |
+	|											   |
+	|											   |
+ 550:	8b 44 24 f4          	mov    eax,DWORD PTR [rsp-0xc]					   |
+ 554:	83 f8 0d             	cmp    eax,0xd							   |
+ 557:	77 23                	ja     57c <main+0x4c>						   |
+ 559:	48 63 04 82          	movsxd rax,DWORD PTR [rdx+rax*4]				   |
+ 55d:	48 01 d0             	add    rax,rdx							   |
+ 560:	ff e0                	jmp    rax							   |
+	|											   |
+	|											   |
+ 588:	48 63 c1             	movsxd rax,ecx							   |
+ 58b:	c7 44 24 f4 0c 00 00 	mov    DWORD PTR [rsp-0xc],0xc					   |
+ 592:	00 											   |
+ 593:	44 0f b6 44 04 f8    	movzx  r8d,BYTE PTR [rsp+rax*1-0x8]	#任意の値をゼロ拡張して転送|
+ 599:	eb b5                	jmp    550 <main+0x20>						   |
+	|											   |
+	|											   |
+ 550:	8b 44 24 f4          	mov    eax,DWORD PTR [rsp-0xc]					   |
+ 554:	83 f8 0d             	cmp    eax,0xd							   |
+ 557:	77 23                	ja     57c <main+0x4c>						   |
+ 559:	48 63 04 82          	movsxd rax,DWORD PTR [rdx+rax*4]				   |
+ 55d:	48 01 d0             	add    rax,rdx							   |
+ 560:	ff e0                	jmp    rax							   |
+	|											   |
+	|											   |
+ 568:	c7 44 24 f4 09 00 00 	mov    DWORD PTR [rsp-0xc],0x9					   |
+ 56f:	00 											   |
+ 570:	8b 44 24 f4          	mov    eax,DWORD PTR [rsp-0xc]					   |
+ 574:	83 c1 01             	add    ecx,0x1							   |
+ 577:	83 f8 0d             	cmp    eax,0xd							   |
+ 57a:	76 dd                	jbe    559 <main+0x29>						   |
+	|											   |
+	+>----------------------------------------------------->+				   |
+ 57c:	b8 01 00 00 00       	mov    eax,0x1			|				   |
+ 581:	c3                   	ret    				|				   |
+								|				   |
+	+<-----------------------------------------------------<+				   |
+	|											   |
+ 559:	48 63 04 82          	movsxd rax,DWORD PTR [rdx+rax*4]				   |
+ 55d:	48 01 d0             	add    rax,rdx							   |
+ 560:	ff e0                	jmp    rax							   |
+	|											   |
+	|											   |
+	+>---------------------------------------------------------------------------------------->+
+
+
+
+
+#rsp-0x8からの部分に文字列が格納されている
+
+	r11b	rsp+eax*1-0x8	
+#ed	dc	31(1)
+#d5	ad	78(x)
+#a7	97	30(0)
+#92	f3	61(a)
+#ef	98	77(w)
+#95	fc	69(i)
+#fa	9f	65(e)
+#9e	cc	52(R)
